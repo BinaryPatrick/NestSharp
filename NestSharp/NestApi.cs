@@ -49,7 +49,7 @@ namespace NestSharp
 		/// <param name="authorizationCode">Access code from Nest</param>
 		public void GetAccessToken (string authorizationCode)
         {
-			// Not Required anymore.
+		    // Not Required anymore.
             //var url = string.Format (ACCESS_TOKEN_URL,
             //              ClientId,
             //              authorizationToken,
