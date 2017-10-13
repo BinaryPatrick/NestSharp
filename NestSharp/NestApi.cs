@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using NestSharp.Models;
 
 namespace NestSharp
 {
@@ -32,7 +33,6 @@ namespace NestSharp
 		public string AccessToken { get; set; }
 
         public DateTime ExpiresAt { get; set; }
-
 
         public string GetAuthorizationUrl ()
         {
@@ -88,18 +88,6 @@ namespace NestSharp
                 throw new UnauthorizedAccessException ("Invalid Acess Token");
             }
         }
-
-        //TODO: Get the right data enclosure for this call
-//        public async Task<Devices> GetStructuresAndDevicesAsync ()
-//        {
-//            CheckAuth ();
-//
-//            var url = "https://developer-api.nest.com/?auth={0}";
-//
-//            var data = await http.GetStringAsync (string.Format (url, AccessToken));
-//
-//            return JsonConvert.DeserializeObject<Devices> (data);
-//        }
 
         public async Task<Devices> GetDevicesAsync ()
         {
