@@ -1,11 +1,7 @@
-using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using Newtonsoft.Json.Converters;
-using System.Threading.Tasks;
-using System.Net.Http;
 
-namespace NestSharp
+namespace NestSharp.Models
 {
     public class Devices
     {

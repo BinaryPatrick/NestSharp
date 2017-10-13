@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NestSharp
+﻿namespace NestSharp.Models
 {
     public enum ColorState
     {

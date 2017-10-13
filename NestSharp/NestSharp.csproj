@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -32,12 +32,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NestApi.cs" />
-    <Compile Include="MetaData.cs" />
-    <Compile Include="Devices.cs" />
-    <Compile Include="Thermostat.cs" />
-    <Compile Include="SmokeCoAlarm.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="Structure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -56,5 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NestSharp.Models\NestSharp.Models.csproj">
+      <Project>{d3dd8bf7-9124-4048-9a1a-61f2f129ef67}</Project>
+      <Name>NestSharp.Models</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

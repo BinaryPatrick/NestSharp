@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,6 +52,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NestSharp.Models\NestSharp.Models.csproj">
+      <Project>{D3DD8BF7-9124-4048-9A1A-61F2F129EF67}</Project>
+      <Name>NestSharp.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NestSharp\NestSharp.csproj">
       <Project>{368C9C7E-B460-4434-BE8D-6D463F3DA92A}</Project>
       <Name>NestSharp</Name>

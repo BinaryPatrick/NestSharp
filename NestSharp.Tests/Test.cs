@@ -34,15 +34,15 @@ namespace NestSharp.Tests
                 // Get the URL to load in a browser for the PIN
                 var authUrl = nest.GetAuthorizationUrl ();
 
-                System.Diagnostics.Process.Start (authUrl);
+                //System.Diagnostics.Process.Start (authUrl);
 
-                Console.WriteLine ("Enter your PIN:");
+                //Console.WriteLine ("Enter your PIN:");
 
-                // Read back in the PIN
-                var authToken = Console.ReadLine ();
+				// Read back in the PIN
+				var authToken = ""; //Console.ReadLine ();
 
                 // Get an access token to use with the API
-                await nest.GetAccessToken (authToken);
+                nest.GetAccessToken (authToken);
 
                 File.WriteAllText (file, nest.AccessToken);
             }
