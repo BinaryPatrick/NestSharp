@@ -41,7 +41,7 @@ namespace NestSharp
             return string.Format (
                 AUTHORIZATION_URL,
                 ClientId,
-                state);            
+                state);
         }
 		/// <summary>
 		/// Retrieves an Access Token using the user supplied authorization code. This code can be retireved by using the GetAuthorizationUrl method 
@@ -49,12 +49,6 @@ namespace NestSharp
 		/// <param name="authorizationCode">Access code from Nest</param>
 		public async void GetAccessTokenAsync (string authorizationCode)
         {
-		    // Not Required anymore.
-            //var url = string.Format (ACCESS_TOKEN_URL,
-            //              ClientId,
-            //              authorizationToken,
-            //              ClientSecret);
-
             IDictionary<string,string> body = new Dictionary<string,string> ();
 			body.Add ("client_id", ClientId);
 			body.Add ("code", authorizationCode);
@@ -81,7 +75,7 @@ namespace NestSharp
 			}
         }
 
-        void CheckAuth ()
+        void CheckAuth()
         {
             if (string.IsNullOrEmpty (AccessToken)
                 || ExpiresAt < DateTime.UtcNow) {
@@ -91,7 +85,7 @@ namespace NestSharp
 
         public async Task<Devices> GetDevicesAsync ()
         {
-            CheckAuth ();
+            CheckAuth();
 
             var url = "https://developer-api.nest.com/devices.json?auth={0}";
 
@@ -102,7 +96,7 @@ namespace NestSharp
 
         public async Task<Dictionary<string, Structure>> GetStructuresAsync ()
         {
-            CheckAuth ();
+            CheckAuth();
 
             var url = "https://developer-api.nest.com/structures.json?auth={0}";
 
@@ -113,7 +107,7 @@ namespace NestSharp
             
         public async Task<Thermostat> GetThermostatAsync (string deviceId)
         {
-            CheckAuth ();
+            CheckAuth();
 
             var url = BASE_URL + "devices/thermostats/.json{0}?auth={1}";
                        
