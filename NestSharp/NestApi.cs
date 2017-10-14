@@ -30,7 +30,7 @@ namespace NestSharp
 
         public string ClientSecret { get; private set; }
 
-		public string AccessToken { get; set; }
+		public string BearerToken { get; set; }
 
         public DateTime ExpiresAt { get; set; }
 
@@ -47,11 +47,11 @@ namespace NestSharp
 		/// Retrieves an Access Token using the user supplied authorization code. This code can be retireved by using the GetAuthorizationUrl method 
 		/// </summary>
 		/// <param name="authorizationCode">Access code from Nest</param>
-		public async void GetAccessTokenAsync (string authorizationCode)
+		public async void GetBearerToken (string GrantToken)
         {
             IDictionary<string,string> body = new Dictionary<string,string> ();
 			body.Add ("client_id", ClientId);
-			body.Add ("code", authorizationCode);
+			body.Add ("code", GrantToken);
 			body.Add ("client_secret", ClientSecret);
 			body.Add ("grant_type", "authorization_code");
 
@@ -64,7 +64,7 @@ namespace NestSharp
 				json["access_token"] != null &&
 				json["expires_in"] != null)
 			{
-				AccessToken = json.Value<string>("access_token");
+				BearerToken = json.Value<string>("access_token");
 				long expiresIn = json.Value<long>("expires_in");
 
 				ExpiresAt = DateTime.UtcNow.AddSeconds(expiresIn);
@@ -77,7 +77,7 @@ namespace NestSharp
 
         void CheckAuth()
         {
-            if (string.IsNullOrEmpty (AccessToken)
+            if (string.IsNullOrEmpty (BearerToken)
                 || ExpiresAt < DateTime.UtcNow) {
                 throw new UnauthorizedAccessException ("Invalid Acess Token");
             }
@@ -89,7 +89,7 @@ namespace NestSharp
 
             var url = "https://developer-api.nest.com/devices.json?auth={0}";
 
-            var data = await http.GetStringAsync (string.Format (url, AccessToken));
+            var data = await http.GetStringAsync (string.Format (url, BearerToken));
 
             return JsonConvert.DeserializeObject<Devices> (data);
         }
@@ -100,7 +100,7 @@ namespace NestSharp
 
             var url = "https://developer-api.nest.com/structures.json?auth={0}";
 
-            var data = await http.GetStringAsync (string.Format (url, AccessToken));
+            var data = await http.GetStringAsync (string.Format (url, BearerToken));
 
             return JsonConvert.DeserializeObject<Dictionary<string, Structure>> (data);
         }
@@ -111,7 +111,7 @@ namespace NestSharp
 
             var url = BASE_URL + "devices/thermostats/.json{0}?auth={1}";
                        
-            var data = await http.GetStringAsync (string.Format (url, deviceId, AccessToken));
+            var data = await http.GetStringAsync (string.Format (url, deviceId, BearerToken));
 
             var thermostats = JsonConvert.DeserializeObject<Dictionary<string, Thermostat>> (data);
 
@@ -152,7 +152,7 @@ namespace NestSharp
             var formattedUrl = string.Format (
                                    url, 
                                    thermostat.DeviceId,
-                                   AccessToken);
+                                   BearerToken);
 
             var formattedField = string.Format (
                                      field, 
