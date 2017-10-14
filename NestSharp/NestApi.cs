@@ -47,7 +47,7 @@ namespace NestSharp
 		/// Retrieves an Access Token using the user supplied authorization code. This code can be retireved by using the GetAuthorizationUrl method 
 		/// </summary>
 		/// <param name="authorizationCode">Access code from Nest</param>
-		public void GetAccessToken (string authorizationCode)
+		public async void GetAccessTokenAsync (string authorizationCode)
         {
 		    // Not Required anymore.
             //var url = string.Format (ACCESS_TOKEN_URL,
@@ -61,8 +61,8 @@ namespace NestSharp
 			body.Add ("client_secret", ClientSecret);
 			body.Add ("grant_type", "authorization_code");
 
-            HttpResponseMessage r = http.PostAsync(ACCESS_TOKEN_URL, new FormUrlEncodedContent(body)).Result;
-            string data = r.Content.ReadAsStringAsync().Result;
+            HttpResponseMessage r = await http.PostAsync(ACCESS_TOKEN_URL, new FormUrlEncodedContent(body));
+            string data = await r.Content.ReadAsStringAsync();
 
             JObject json = JObject.Parse(data);
 
