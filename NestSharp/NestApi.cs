@@ -47,7 +47,7 @@ namespace NestSharp
 		/// Retrieves an Access Token using the user supplied authorization code. This code can be retireved by using the GetAuthorizationUrl method 
 		/// </summary>
 		/// <param name="authorizationCode">Access code from Nest</param>
-		public async void GetBearerToken (string GrantToken)
+		public async Task<string> GetBearerToken (string GrantToken)
         {
             IDictionary<string,string> body = new Dictionary<string,string> ();
 			body.Add ("client_id", ClientId);
@@ -73,12 +73,12 @@ namespace NestSharp
 			{
 				throw new JsonException("Missing or Invalid Token");
 			}
+            return BearerToken;
         }
 
         void CheckAuth()
         {
-            if (string.IsNullOrEmpty (BearerToken)
-                || ExpiresAt < DateTime.UtcNow) {
+            if (string.IsNullOrEmpty (BearerToken) || ExpiresAt < DateTime.UtcNow) {
                 throw new UnauthorizedAccessException ("Invalid Acess Token");
             }
         }
